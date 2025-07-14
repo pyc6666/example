@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美食點餐系統 - 購物車</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-shop me-2"></i>美食點餐
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">首頁</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.html">菜單</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order-status.html">訂單查詢</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="cart.html" class="btn btn-outline-light position-relative me-2 active">
+                        <i class="bi bi-cart3"></i>
+                        購物車
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                            0
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header bg-primary text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-5 fw-bold">
+                        <i class="bi bi-cart3 me-3"></i>購物車
+                    </h1>
+                    <p class="lead" id="cart-subtitle">檢視您選購的美味料理</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <div class="cart-status-badge">
+                        <span class="badge bg-light text-dark fs-6" id="cart-status">
+                            <i class="bi bi-clock me-1"></i>購物車將於今日結束前過期
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Content -->
+    <section class="py-4">
+        <div class="container">
+            <div class="row">
+                <!-- Cart Items -->
+                <div class="col-lg-8">
+                    <!-- Cart Actions Bar -->
+                    <div class="cart-actions-bar mb-4">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="cart-info">
+                                <h5 class="mb-0">購物車項目</h5>
+                                <small class="text-muted" id="items-count">載入中...</small>
+                            </div>
+                            <div class="cart-actions">
+                                <button type="button" class="btn btn-outline-secondary btn-sm me-2" id="continue-shopping">
+                                    <i class="bi bi-arrow-left me-1"></i>繼續選購
+                                </button>
+                                <button type="button" class="btn btn-outline-danger btn-sm" id="clear-cart-btn">
+                                    <i class="bi bi-trash me-1"></i>清空購物車
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Loading Spinner -->
+                    <div class="loading-spinner text-center py-5" id="loading-spinner">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">載入中...</span>
+                        </div>
+                        <p class="mt-2 text-muted">正在載入購物車...</p>
+                    </div>
+
+                    <!-- Empty Cart -->
+                    <div class="empty-cart text-center py-5" id="empty-cart" style="display: none;">
+                        <div class="empty-cart-icon mb-4">
+                            <i class="bi bi-cart-x display-1 text-muted"></i>
+                        </div>
+                        <h3 class="mb-3">購物車是空的</h3>
+                        <p class="text-muted mb-4">還沒有選購任何美味料理呢！</p>
+                        <div class="empty-cart-actions">
+                            <a href="menu.html" class="btn btn-primary btn-lg">
+                                <i class="bi bi-search me-2"></i>瀏覽菜單
+                            </a>
+                            <a href="index.html" class="btn btn-outline-primary btn-lg ms-2">
+                                <i class="bi bi-house me-2"></i>回到首頁
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Cart Items List -->
+                    <div class="cart-items-container" id="cart-items-container">
+                        <!-- 動態載入購物車項目 -->
+                    </div>
+
+                    <!-- Recommendations -->
+                    <div class="recommendations-section mt-5" id="recommendations-section" style="display: none;">
+                        <h5 class="mb-3">
+                            <i class="bi bi-lightbulb text-warning me-2"></i>推薦加購
+                        </h5>
+                        <div class="row" id="recommendations-container">
+                            <!-- 動態載入推薦項目 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary Sidebar -->
+                <div class="col-lg-4">
+                    <div class="order-summary-card">
+                        <div class="card">
+                            <div class="card-header bg-light">
+                                <h5 class="card-title mb-0">
+                                    <i class="bi bi-receipt me-2"></i>訂單摘要
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <!-- Order Summary Content -->
+                                <div class="order-summary-content" id="order-summary-content">
+                                    <div class="loading-summary text-center py-3">
+                                        <div class="spinner-border spinner-border-sm text-primary" role="status">
+                                            <span class="visually-hidden">載入中...</span>
+                                        </div>
+                                        <p class="mt-2 mb-0 small text-muted">載入摘要...</p>
+                                    </div>
+                                </div>
+
+                                <!-- Promo Code Section -->
+                                <div class="promo-section mt-3" id="promo-section" style="display: none;">
+                                    <hr>
+                                    <div class="promo-code-input">
+                                        <label class="form-label small">優惠代碼</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" id="promo-code-input" placeholder="輸入優惠代碼">
+                                            <button class="btn btn-outline-secondary" type="button" id="apply-promo-btn">
+                                                套用
+                                            </button>
+                                        </div>
+                                        <div class="promo-feedback mt-2" id="promo-feedback"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Checkout Button -->
+                                <div class="checkout-section mt-4" id="checkout-section" style="display: none;">
+                                    <button type="button" class="btn btn-warning btn-lg w-100 mb-3" id="checkout-btn">
+                                        <i class="bi bi-credit-card me-2"></i>
+                                        結帳
+                                    </button>
+                                    <div class="checkout-options">
+                                        <div class="row g-2">
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-outline-primary btn-sm w-100" id="save-for-later-btn">
+                                                    <i class="bi bi-bookmark me-1"></i>稍後結帳
+                                                </button>
+                                            </div>
+                                            <div class="col-6">
+                                                <button type="button" class="btn btn-outline-secondary btn-sm w-100" id="share-cart-btn">
+                                                    <i class="bi bi-share me-1"></i>分享購物車
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Trust Badges -->
+                                <div class="trust-badges mt-4 text-center">
+                                    <div class="trust-badge-grid">
+                                        <div class="trust-badge">
+                                            <i class="bi bi-shield-check text-success"></i>
+                                            <small>安全付款</small>
+                                        </div>
+                                        <div class="trust-badge">
+                                            <i class="bi bi-truck text-primary"></i>
+                                            <small>快速送達</small>
+                                        </div>
+                                        <div class="trust-badge">
+                                            <i class="bi bi-headset text-info"></i>
+                                            <small>客服支援</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Special Offers -->
+                    <div class="special-offers-card mt-4">
+                        <div class="card border-warning">
+                            <div class="card-header bg-warning bg-opacity-10">
+                                <h6 class="card-title mb-0 text-warning">
+                                    <i class="bi bi-gift me-2"></i>特別優惠
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="offer-item">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-percent text-success me-2"></i>
+                                        <div>
+                                            <small><strong>滿 $500 享 9 折</strong></small>
+                                            <br>
+                                            <small class="text-muted">輸入代碼：SAVE10</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="my-2">
+                                <div class="offer-item">
+                                    <div class="d-flex align-items-center">
+                                        <i class="bi bi-clock text-primary me-2"></i>
+                                        <div>
+                                            <small><strong>今日限定免運費</strong></small>
+                                            <br>
+                                            <small class="text-muted">滿 $300 自動適用</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confirm Clear Cart Modal -->
+    <div class="modal fade" id="clearCartModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-exclamation-triangle text-warning me-2"></i>
+                        確認清空購物車
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p>您確定要清空購物車嗎？此操作無法復原。</p>
+                    <div class="alert alert-warning d-flex align-items-center">
+                        <i class="bi bi-info-circle me-2"></i>
+                        <div>所有已選購的商品都將被移除。</div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-danger" id="confirm-clear-cart">
+                        <i class="bi bi-trash me-2"></i>確認清空
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/common.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

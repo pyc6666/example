@@ -1,0 +1,60 @@
+# 環境變數和敏感資料
+.env
+.env.local
+.env.production
+
+# Docker 資料持久化
+docker-data/
+mongodb-data/
+
+# 備份文件
+backups/
+*.dump
+*.gz
+
+# 日誌文件
+logs/
+*.log
+
+# Python 相關
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE 設定
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS 相關
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Node.js (如果將來使用)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 臨時文件
+*.tmp
+*.temp

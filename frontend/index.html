@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美食點餐系統 - 首頁</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-shop me-2"></i>美食點餐
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">首頁</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu.html">菜單</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order-status.html">訂單查詢</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="cart.html" class="btn btn-outline-light position-relative me-2">
+                        <i class="bi bi-cart3"></i>
+                        購物車
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                            0
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row align-items-center min-vh-100">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="display-4 fw-bold text-white mb-4">
+                            美味佳餚
+                            <span class="text-warning">隨時點</span>
+                        </h1>
+                        <p class="lead text-white-50 mb-4">
+                            精選新鮮食材，專業廚師烹調，為您提供最優質的餐飲體驗。
+                            快速點餐，美味直送！
+                        </p>
+                        <div class="d-flex gap-3">
+                            <a href="menu.html" class="btn btn-warning btn-lg px-4">
+                                <i class="bi bi-eye me-2"></i>查看菜單
+                            </a>
+                            <a href="#features" class="btn btn-outline-light btn-lg px-4">
+                                <i class="bi bi-info-circle me-2"></i>了解更多
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image text-center">
+                        <div class="food-illustration">
+                            <i class="bi bi-cup-hot-fill text-warning" style="font-size: 12rem;"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold">為什麼選擇我們？</h2>
+                    <p class="lead text-muted">三大優勢讓您享受最佳用餐體驗</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="feature-card text-center h-100">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-lightning-charge-fill text-primary" style="font-size: 3rem;"></i>
+                        </div>
+                        <h4>快速便利</h4>
+                        <p class="text-muted">簡單幾步完成點餐，省時省力，讓您快速享用美食。</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center h-100">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-award-fill text-success" style="font-size: 3rem;"></i>
+                        </div>
+                        <h4>品質保證</h4>
+                        <p class="text-muted">嚴選優質食材，專業烹調技術，確保每道菜品的最佳品質。</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center h-100">
+                        <div class="feature-icon mb-3">
+                            <i class="bi bi-truck text-info" style="font-size: 3rem;"></i>
+                        </div>
+                        <h4>即時追蹤</h4>
+                        <p class="text-muted">訂單狀態即時更新，讓您清楚掌握餐點準備進度。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Categories Section -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="display-5 fw-bold">熱門分類</h2>
+                    <p class="lead text-muted">探索我們的美味料理分類</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="bi bi-egg-fried text-warning"></i>
+                        </div>
+                        <h5>主餐</h5>
+                        <p class="text-muted">精選主食料理</p>
+                        <a href="menu.html?category=main" class="btn btn-sm btn-outline-primary">查看更多</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="bi bi-cup-straw text-info"></i>
+                        </div>
+                        <h5>飲品</h5>
+                        <p class="text-muted">新鮮現調飲料</p>
+                        <a href="menu.html?category=drinks" class="btn btn-sm btn-outline-primary">查看更多</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="bi bi-cake2 text-danger"></i>
+                        </div>
+                        <h5>甜點</h5>
+                        <p class="text-muted">精緻手作甜品</p>
+                        <a href="menu.html?category=desserts" class="btn btn-sm btn-outline-primary">查看更多</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="category-card">
+                        <div class="category-icon">
+                            <i class="bi bi-droplet text-success"></i>
+                        </div>
+                        <h5>湯品</h5>
+                        <p class="text-muted">暖心營養湯品</p>
+                        <a href="menu.html?category=soups" class="btn btn-sm btn-outline-primary">查看更多</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="display-5 fw-bold text-white mb-4">準備好享用美食了嗎？</h2>
+                    <p class="lead text-white-50 mb-4">立即開始您的點餐之旅，美味就在指尖</p>
+                    <a href="menu.html" class="btn btn-warning btn-lg px-5">
+                        <i class="bi bi-arrow-right me-2"></i>立即點餐
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="bi bi-shop me-2"></i>美食點餐系統</h5>
+                    <p class="text-muted">提供最優質的線上點餐體驗</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="text-muted mb-0">© 2025 美食點餐系統. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/common.js"></script>
+    <script src="js/index.js"></script>
+</body>
+</html>

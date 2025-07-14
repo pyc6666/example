@@ -1,0 +1,56 @@
+# Docker Compose for Restaurant Ordering System
+version: '3.8'
+
+services:
+  # MongoDB 資料庫服務
+  mongodb:
+    image: mongo:7.0
+    container_name: restaurant_mongodb
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      # 先不使用身份驗證，方便開發測試
+      # MONGO_INITDB_ROOT_USERNAME: admin
+      # MONGO_INITDB_ROOT_PASSWORD: password123
+      MONGO_INITDB_DATABASE: restaurant_db
+    volumes:
+      # 數據持久化
+      - mongodb_data:/data/db
+      # 初始化腳本
+      - ./docker/mongo-init:/docker-entrypoint-initdb.d
+    networks:
+      - restaurant_network
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # MongoDB Express - Web 管理介面 (可選)
+  mongo-express:
+    image: mongo-express:1.0.0
+    container_name: restaurant_mongo_express
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password123
+      ME_CONFIG_MONGODB_URL: mongodb://admin:password123@mongodb:27017/
+      ME_CONFIG_BASICAUTH_USERNAME: webadmin
+      ME_CONFIG_BASICAUTH_PASSWORD: webpass123
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - restaurant_network
+
+volumes:
+  mongodb_data:
+    driver: local
+
+networks:
+  restaurant_network:
+    driver: bridge

@@ -1,0 +1,13 @@
+# Flask 核心套件
+Flask==3.0.0
+Flask-CORS==4.0.0
+
+# MongoDB 驅動
+pymongo==4.6.1
+
+# 工具套件
+python-dotenv==1.0.0
+bson==0.5.10
+
+# 開發工具
+flask-shell-ipython==1.4.0

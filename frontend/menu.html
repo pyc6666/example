@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美食點餐系統 - 菜單</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <i class="bi bi-shop me-2"></i>美食點餐
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">首頁</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="menu.html">菜單</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="order-status.html">訂單查詢</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="cart.html" class="btn btn-outline-light position-relative me-2">
+                        <i class="bi bi-cart3"></i>
+                        購物車
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id="cart-count">
+                            0
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header bg-primary text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-5 fw-bold">精選菜單</h1>
+                    <p class="lead">探索我們精心準備的美味料理</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <div class="search-box">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="search-input" placeholder="搜尋菜單...">
+                            <button class="btn btn-warning" type="button" id="search-btn">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Content -->
+    <section class="py-4">
+        <div class="container">
+            <div class="row">
+                <!-- Sidebar Filters -->
+                <div class="col-lg-3 mb-4">
+                    <div class="filter-sidebar">
+                        <!-- Category Filter -->
+                        <div class="filter-section mb-4">
+                            <h5 class="filter-title">
+                                <i class="bi bi-list-ul me-2"></i>分類
+                            </h5>
+                            <div class="category-filters" id="category-filters">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="category" id="category-all" value="all" checked>
+                                    <label class="form-check-label" for="category-all">
+                                        全部
+                                    </label>
+                                </div>
+                                <!-- 動態載入分類 -->
+                            </div>
+                        </div>
+
+                        <!-- Price Filter -->
+                        <div class="filter-section mb-4">
+                            <h5 class="filter-title">
+                                <i class="bi bi-currency-dollar me-2"></i>價格範圍
+                            </h5>
+                            <div class="price-filter">
+                                <div class="row g-2">
+                                    <div class="col-6">
+                                        <input type="number" class="form-control form-control-sm" id="min-price" placeholder="最低價">
+                                    </div>
+                                    <div class="col-6">
+                                        <input type="number" class="form-control form-control-sm" id="max-price" placeholder="最高價">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Dietary Filter -->
+                        <div class="filter-section mb-4">
+                            <h5 class="filter-title">
+                                <i class="bi bi-heart me-2"></i>飲食偏好
+                            </h5>
+                            <div class="dietary-filters">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="vegetarian-filter">
+                                    <label class="form-check-label" for="vegetarian-filter">
+                                        <i class="bi bi-leaf text-success me-1"></i>素食
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="vegan-filter">
+                                    <label class="form-check-label" for="vegan-filter">
+                                        <i class="bi bi-heart-fill text-danger me-1"></i>純素
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sort Options -->
+                        <div class="filter-section">
+                            <h5 class="filter-title">
+                                <i class="bi bi-sort-down me-2"></i>排序方式
+                            </h5>
+                            <select class="form-select" id="sort-select">
+                                <option value="popularity_score,desc">熱門程度</option>
+                                <option value="price,asc">價格：低到高</option>
+                                <option value="price,desc">價格：高到低</option>
+                                <option value="rating,desc">評分</option>
+                                <option value="name,asc">名稱 A-Z</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="col-lg-9">
+                    <!-- Filter Tags -->
+                    <div class="active-filters mb-3" id="active-filters" style="display: none;">
+                        <span class="me-2">篩選條件：</span>
+                        <div class="filter-tags d-inline-flex flex-wrap gap-2"></div>
+                        <button type="button" class="btn btn-sm btn-outline-secondary ms-2" id="clear-filters">
+                            <i class="bi bi-x-circle me-1"></i>清除全部
+                        </button>
+                    </div>
+
+                    <!-- Category Tabs (Top Level) -->
+                    <div class="category-tabs mb-4" id="category-tabs">
+                        <ul class="nav nav-pills justify-content-center">
+                            <li class="nav-item">
+                                <button class="nav-link active" data-category="all">全部</button>
+                            </li>
+                            <!-- 動態載入分類標籤 -->
+                        </ul>
+                    </div>
+
+                    <!-- Results Info -->
+                    <div class="results-info d-flex justify-content-between align-items-center mb-3">
+                        <div class="results-count">
+                            <span id="results-text">正在載入菜單...</span>
+                        </div>
+                        <div class="view-toggle">
+                            <div class="btn-group btn-group-sm" role="group">
+                                <button type="button" class="btn btn-outline-secondary active" id="grid-view">
+                                    <i class="bi bi-grid"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" id="list-view">
+                                    <i class="bi bi-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Loading Spinner -->
+                    <div class="loading-spinner text-center py-5" id="loading-spinner">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">載入中...</span>
+                        </div>
+                        <p class="mt-2 text-muted">正在載入美味菜單...</p>
+                    </div>
+
+                    <!-- Menu Items Grid -->
+                    <div class="menu-grid" id="menu-grid">
+                        <div class="row g-4" id="menu-items-container">
+                            <!-- 動態載入菜單項目 -->
+                        </div>
+                    </div>
+
+                    <!-- Pagination -->
+                    <nav aria-label="菜單分頁" class="mt-4">
+                        <ul class="pagination justify-content-center" id="pagination">
+                            <!-- 動態載入分頁 -->
+                        </ul>
+                    </nav>
+
+                    <!-- No Results -->
+                    <div class="no-results text-center py-5" id="no-results" style="display: none;">
+                        <i class="bi bi-search display-1 text-muted"></i>
+                        <h3 class="mt-3">找不到符合的菜單項目</h3>
+                        <p class="text-muted">請嘗試調整搜尋條件或瀏覽其他分類</p>
+                        <button type="button" class="btn btn-primary" onclick="clearAllFilters()">
+                            <i class="bi bi-arrow-clockwise me-2"></i>重置篩選
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Item Modal -->
+    <div class="modal fade" id="menuItemModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal-item-name">菜單項目詳情</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img id="modal-item-image" src="" alt="" class="img-fluid rounded">
+                        </div>
+                        <div class="col-md-6">
+                            <div class="item-details">
+                                <h4 id="modal-item-title" class="mb-3"></h4>
+                                <p id="modal-item-description" class="text-muted mb-3"></p>
+                                
+                                <div class="item-meta mb-3">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <strong>價格：</strong>
+                                            <span class="text-primary fw-bold fs-5" id="modal-item-price"></span>
+                                        </div>
+                                        <div class="col-6">
+                                            <strong>準備時間：</strong>
+                                            <span id="modal-item-time"></span> 分鐘
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="ingredients mb-3">
+                                    <strong>主要食材：</strong>
+                                    <div id="modal-item-ingredients" class="mt-1"></div>
+                                </div>
+
+                                <div class="dietary-info mb-3">
+                                    <div id="modal-dietary-badges"></div>
+                                </div>
+
+                                <div class="add-to-cart-section">
+                                    <div class="quantity-selector mb-3">
+                                        <label class="form-label">數量：</label>
+                                        <div class="input-group" style="width: 120px;">
+                                            <button class="btn btn-outline-secondary" type="button" id="qty-decrease">-</button>
+                                            <input type="number" class="form-control text-center" id="item-quantity" value="1" min="1" max="10">
+                                            <button class="btn btn-outline-secondary" type="button" id="qty-increase">+</button>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-warning btn-lg w-100" id="add-to-cart-btn">
+                                        <i class="bi bi-cart-plus me-2"></i>加入購物車
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/common.js"></script>
+    <script src="js/menu.js"></script>
+</body>
+</html>
